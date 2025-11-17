@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "React-Native",
-    "slug": "React-Native",
+    "name": "react-native-test",
+    "slug": "react-native-test",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "reactnative",
+    "scheme": "reactnativetest",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
