@@ -21,7 +21,29 @@ export const styles = StyleSheet.create({
     gap: 32,
   },
   inputContainer: {
+    display: "flex",
+    alignItems: "center",
     flexDirection: "row",
-    gap: 32,
+    gap: 48,
+    justifyContent: "center",
+    width: "100%",
+  },
+  buttonStyleDefault: {
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
+  buttonStyleNotPressed: {
+    backgroundColor: "#c2c2c2",
+  },
+  buttonStylePressed: {
+    backgroundColor: "#ebebeb",
+  },
+  emailInputStyle: {
+    height: 32,
+    width: 168,
+    borderBottomWidth: 2,
+    borderBottomColor: "#ff3030ff",
+    color: "#ff3030ff",
   },
 });
