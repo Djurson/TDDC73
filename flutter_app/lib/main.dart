@@ -95,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: .center,
           mainAxisSize: .max,
           children: [
+            Image.asset('assets/images/Diagram.png'),
             ButtonSection(spacing: 24.0),
             Padding(
               padding: EdgeInsetsGeometry.symmetric(
