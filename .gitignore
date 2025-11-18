@@ -1,4 +1,4 @@
 /.idea
 /react-native-test/.vscode
 
-/Kotlin-XML
+Kotlin-XML/*
