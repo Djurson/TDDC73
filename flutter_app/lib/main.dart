@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,7 +28,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: .fromSeed(
+          seedColor: const Color.fromARGB(255, 21, 123, 0),
+        ),
       ),
       home: const MyHomePage(title: 'Flutter'),
     );
@@ -54,19 +56,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -103,20 +92,126 @@ class _MyHomePageState extends State<MyHomePage> {
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
           mainAxisAlignment: .center,
+          crossAxisAlignment: .center,
+          mainAxisSize: .max,
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            ButtonSection(spacing: 24.0),
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(
+                vertical: 48,
+                horizontal: 64,
+              ),
+              child: InputField(),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class ButtonSection extends StatelessWidget {
+  const ButtonSection({super.key, required this.spacing});
+
+  final double spacing;
+
+  static ButtonStyle buttonStyle = ButtonStyle(
+    backgroundColor: WidgetStatePropertyAll(
+      const Color.fromARGB(255, 149, 149, 149),
+    ),
+    foregroundColor: WidgetStatePropertyAll<Color>(
+      const Color.fromARGB(255, 0, 0, 0),
+    ),
+    padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
+      const EdgeInsetsGeometry.symmetric(vertical: 12, horizontal: 16),
+    ),
+    shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4.0), // Adjust the radius value
       ),
+    ),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        mainAxisAlignment: .center,
+        crossAxisAlignment: .center,
+        spacing: spacing,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: spacing,
+            children: [
+              TextButton(
+                onPressed: () {},
+                style: buttonStyle,
+                child: const Text('Button 1'),
+              ),
+              TextButton(
+                onPressed: () {},
+                style: buttonStyle,
+                child: const Text('Button 2'),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            spacing: spacing,
+            children: [
+              TextButton(
+                onPressed: () {},
+                style: buttonStyle,
+                child: const Text('Button 3'),
+              ),
+              TextButton(
+                onPressed: () {},
+                style: buttonStyle,
+                child: const Text('Button 4'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class InputField extends StatelessWidget {
+  const InputField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 16,
+          children: [
+            Text('Email:'),
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
