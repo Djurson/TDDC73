@@ -25,16 +25,18 @@ export const styles = StyleSheet.create({
     height: 200,
     width: "75%",
     borderRadius: 18,
-    boxShadow: "0 8px 12px rgb(0,0,0,0.3)",
     zIndex: 10,
     overflow: "hidden",
     padding: 24,
     gap: 16,
   },
-  cardTopRow: { flex: 2, flexDirection: "row", justifyContent: "space-between" },
+  cardTopRow: {
+    flex: 2,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   chipStyling: {
-    height: "100%",
-    width: "15%",
     zIndex: 15,
     overflow: "hidden",
     borderRadius: 2,
@@ -42,6 +44,10 @@ export const styles = StyleSheet.create({
   cardTextContainer: {
     flex: 10,
     backgroundColor: "#00ffff",
+  },
+  cardNumberContainer: {
+    display: "flex",
+    flexDirection: "row",
   },
   cardForm: {
     backgroundColor: "#fff",
