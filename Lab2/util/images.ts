@@ -27,12 +27,12 @@ export const CardBackgroundImages = [
 ];
 
 export const CardManufacturer = {
-  "1": require("../assets/images/card-images/amex.png"),
-  "2": require("../assets/images/card-images/dinersclub.png"),
-  "3": require("../assets/images/card-images/discover.png"),
-  "4": require("../assets/images/card-images/jcb.png"),
-  "5": require("../assets/images/card-images/mastercard.png"),
-  "6": require("../assets/images/card-images/troy.png"),
-  "7": require("../assets/images/card-images/unionpay.png"),
-  "8": require("../assets/images/card-images/visa.png"),
+  amex: require("../assets/images/card-images/amex.png"),
+  dinersclub: require("../assets/images/card-images/dinersclub.png"),
+  discover: require("../assets/images/card-images/discover.png"),
+  jcb: require("../assets/images/card-images/jcb.png"),
+  mastercard: require("../assets/images/card-images/mastercard.png"),
+  troy: require("../assets/images/card-images/troy.png"),
+  unionpay: require("../assets/images/card-images/unionpay.png"),
+  visa: require("../assets/images/card-images/visa.png"),
 };
