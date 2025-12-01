@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Dispatch, SetStateAction } from "react";
 import { CreditCardInfo } from "@/app";
 import DropdownComponent, { DropDownData } from "./dropdown";
-import { getCreditCardVendor, Vendor } from "@/util/util";
+import { getCreditCardVendor, GetMonths, GetYears, Vendor } from "@/util/util";
 
 export function CardForm({
   creditCardInfo,
@@ -47,13 +47,13 @@ export function CardForm({
               type="Month"
               value={creditCardInfo.month}
               setCreditCardInfo={setCreditCardInfo}
-              data={getMonths()}
+              data={GetMonths()}
             />
             <DropdownComponent
               type="Year"
               value={creditCardInfo.year}
               setCreditCardInfo={setCreditCardInfo}
-              data={getYears()}
+              data={GetYears()}
             />
           </View>
         </View>
@@ -121,20 +121,6 @@ function numberInputChange(
     ...prev,
     creditCardNumber: formatted,
   }));
-}
-
-function getMonths(): DropDownData[] {
-  return Array.from({ length: 12 }, (_, i) => {
-    const month = String(i + 1).padStart(2, "0");
-    return { label: month, value: month };
-  });
-}
-
-function getYears(range = 11, startYear = new Date().getFullYear()): DropDownData[] {
-  return Array.from({ length: range }, (_, i) => {
-    const year = String(startYear + i);
-    return { label: year, value: year.replace("20", "") };
-  });
 }
 
 const styles = StyleSheet.create({

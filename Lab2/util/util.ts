@@ -1,3 +1,5 @@
+import { DropDownData } from "@/components/dropdown";
+
 export type Vendor =
   | "amex"
   | "dinersclub"
@@ -36,4 +38,18 @@ export function getCreditCardVendor(cardnumber: string): Vendor {
 
   // Visa: 4 but also default
   return "visa";
+}
+
+export function GetMonths(): DropDownData[] {
+  return Array.from({ length: 12 }, (_, i) => {
+    const month = String(i + 1).padStart(2, "0");
+    return { label: month, value: month };
+  });
+}
+
+export function GetYears(range = 11, startYear = new Date().getFullYear()): DropDownData[] {
+  return Array.from({ length: range }, (_, i) => {
+    const year = String(startYear + i);
+    return { label: year, value: year.replace("20", "") };
+  });
 }
