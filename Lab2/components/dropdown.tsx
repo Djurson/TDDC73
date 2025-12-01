@@ -39,7 +39,7 @@ const DropdownComponent = ({
   );
 };
 
-export default DropdownComponent;
+export { DropdownComponent };
 
 const styles = StyleSheet.create({
   dropdown: {

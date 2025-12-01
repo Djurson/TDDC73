@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Dispatch, SetStateAction } from "react";
 import { CreditCardInfo } from "@/app";
-import DropdownComponent, { DropDownData } from "./dropdown";
-import { getCreditCardVendor, GetMonths, GetYears, Vendor } from "@/util/util";
+import { getCreditCardVendor, GetMonths, GetYears, onNumberInputChange, Vendor } from "@/util/util";
+import { DropdownComponent } from "./dropdown";
 
 export function CardForm({
   creditCardInfo,
@@ -21,7 +21,7 @@ export function CardForm({
           placeholder={"#### #### #### ####"}
           inputMode="numeric"
           maxLength={cardVendor == "amex" ? 17 : 19}
-          onChangeText={(text) => numberInputChange(text, setCreditCardInfo, cardVendor)}
+          onChangeText={(text) => onNumberInputChange(text, setCreditCardInfo, cardVendor)}
           value={creditCardInfo.creditCardNumber}
         />
       </View>
@@ -86,41 +86,6 @@ export function CardForm({
       </View>
     </View>
   );
-}
-
-/*
-  Normal cards: #### #### #### ####
-  Amex cards: #### ###### #####
-*/
-
-function numberInputChange(
-  text: string,
-  setCreditCardInfo: Dispatch<SetStateAction<CreditCardInfo>>,
-  cardVendor: Vendor
-) {
-  const digits = text.replace(/\D/g, "");
-
-  const isAmex = cardVendor == "amex";
-  const maxDigits = isAmex ? 15 : 16;
-
-  const limited = digits.slice(0, maxDigits);
-
-  let formatted = "";
-
-  if (isAmex) {
-    const a = limited.slice(0, 4);
-    const b = limited.slice(4, 10);
-    const c = limited.slice(10, 15);
-    formatted = [a, b, c].filter(Boolean).join(" ");
-  } else {
-    // groups of 4, but avoid trimming away characters
-    formatted = limited.replace(/(.{4})/g, "$1 ").replace(/ $/, "");
-  }
-
-  setCreditCardInfo((prev) => ({
-    ...prev,
-    creditCardNumber: formatted,
-  }));
 }
 
 const styles = StyleSheet.create({

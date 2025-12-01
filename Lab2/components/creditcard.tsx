@@ -3,7 +3,7 @@ import { CardBackgroundImages, CardManufacturer } from "@/util/images";
 import { Text, View, Image, StyleSheet, Animated } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import { CreditCardInfo } from "@/app";
-import { getCreditCardVendor, Vendor } from "@/util/util";
+import { FormatDisplayStrings, getCreditCardVendor, Vendor } from "@/util/util";
 
 const chipImage = require("../assets/images/card-images/chip.png");
 
@@ -72,7 +72,7 @@ export function CreditCard({ creditCardInfo }: { creditCardInfo: CreditCardInfo 
           </View>
           <View style={styles.cardTextContainer}>
             <View style={{ flexDirection: "row", gap: 14 }}>
-              {formatStrings(creditCardInfo.creditCardNumber, cardVendor)
+              {FormatDisplayStrings(creditCardInfo.creditCardNumber, cardVendor)
                 .split(" ")
                 .map((strArr, index) => {
                   return (
@@ -155,51 +155,6 @@ export function CreditCard({ creditCardInfo }: { creditCardInfo: CreditCardInfo 
       </Animated.View>
     </View>
   );
-}
-
-function formatStrings(raw: string, vendor: Vendor): string {
-  const format = vendor === "amex" ? "#### ###### #####" : "#### #### #### ####";
-  const groupMasks = format.split(" ");
-  const groupLens = groupMasks.map((g) => g.length);
-  const totalLen = groupLens.reduce((a, b) => a + b, 0);
-
-  const digits = raw.replace(/\s/g, "").slice(0, totalLen);
-
-  const lastVisible = vendor === "amex" ? 3 : 4;
-  const groups: string[] = [];
-
-  let cursor = 0;
-  for (let gi = 0; gi < groupLens.length; gi++) {
-    const gLen = groupLens[gi];
-    let groupStr = "";
-
-    for (let i = 0; i < gLen; i++) {
-      const globalIndex = cursor + i;
-      const char = globalIndex < digits.length ? digits[globalIndex] : null;
-
-      if (gi === 0) {
-        // First group: show typed digits, placeholders for the rest
-        groupStr += char ?? "#";
-      } else if (gi === groupLens.length - 1) {
-        // Last group: show last `lastVisible` digits if typed, earlier positions masked if typed
-        const visibleStartIndex = gLen - lastVisible;
-        if (i >= visibleStartIndex) {
-          // visible tail
-          groupStr += char ?? "#";
-        } else {
-          groupStr += char ? "*" : "#";
-        }
-      } else {
-        // Middle groups: mask typed digits, placeholders for the rest
-        groupStr += char ? "*" : "#";
-      }
-    }
-
-    groups.push(groupStr);
-    cursor += gLen;
-  }
-
-  return groups.join(" ");
 }
 
 const styles = StyleSheet.create({
