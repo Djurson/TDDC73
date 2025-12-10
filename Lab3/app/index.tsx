@@ -1,4 +1,4 @@
-import { FetchRepositories } from "@/utils/util";
+import { FetchRepositories } from "@/utils/functions";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 
@@ -11,13 +11,15 @@ export default function Index() {
         "https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc"
       );
 
-      setData(result);
+      if (result !== null) {
+        setData(result);
+      }
     }
 
-    const resultdata = fetch();
-
-    setData(resultdata);
+    fetch();
   }, []);
+
+  console.log(data);
 
   return (
     <View
