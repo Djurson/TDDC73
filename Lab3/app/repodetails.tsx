@@ -9,12 +9,12 @@ import EvilIcons from "@expo/vector-icons/EvilIcons";
 export default function RepoScreen() {
   const { repo } = useLocalSearchParams();
 
-  const repository: TrendingResponse = JSON.parse(repo);
+  const repository: TrendingResponse = JSON.parse(repo as string);
 
   return (
     <View
       style={{
-        backgroundColor: `rgba(${colorScheme.card}, 1)`,
+        backgroundColor: colorScheme.card,
         padding: 8,
         borderRadius: 12,
         boxShadow: cardGlow("2xl"),
@@ -28,27 +28,27 @@ export default function RepoScreen() {
           fontSize: 18,
           fontWeight: "bold",
           marginBottom: 6,
-          color: `rgba(${colorScheme.foreground}, 1)`,
+          color: colorScheme.foreground,
         }}>
         {repository.name}
       </Text>
 
       {/* Description */}
-      <Text style={{ color: `rgba(${colorScheme.foreground}, 1)`, marginBottom: 12 }}>
+      <Text style={{ color: colorScheme.foreground, marginBottom: 12 }}>
         {repository.description || "No description provided."}
       </Text>
       {/* Language */}
-      <Text style={{ color: `rgba(${colorScheme.foreground}, 1)`, marginBottom: 12 }}>
+      <Text style={{ color: colorScheme.foreground, marginBottom: 12 }}>
         {repository.languages}
       </Text>
       {/* Stats */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         {/* Stars */}
         <View style={{ alignItems: "center", flex: 1, borderRadius: 8 }}>
-          <Feather name="star" size={24} color={`rgba(${colorScheme.primary}, 1)`} />
+          <Feather name="star" size={24} color={colorScheme.primary} />
           <Text
             style={{
-              color: `rgba(${colorScheme.foreground}, 1)`,
+              color: colorScheme.foreground,
               marginBottom: 12,
               fontSize: 18,
               fontWeight: "bold",
@@ -56,16 +56,14 @@ export default function RepoScreen() {
             }}>
             {repository.stars}
           </Text>
-          <Text style={{ color: `rgba(${colorScheme.mutedForeground}, 1)`, marginBottom: 12 }}>
-            {"Stars"}
-          </Text>
+          <Text style={{ color: colorScheme.mutedForeground, marginBottom: 12 }}>{"Stars"}</Text>
         </View>
         {/* Forks */}
         <View style={{ alignItems: "center", flex: 1, borderRadius: 8 }}>
-          <FontAwesome6 name="code-fork" size={24} color={`rgba(${colorScheme.primary}, 1)`} />
+          <FontAwesome6 name="code-fork" size={24} color={colorScheme.primary} />
           <Text
             style={{
-              color: `rgba(${colorScheme.foreground}, 1)`,
+              color: colorScheme.foreground,
               marginBottom: 12,
               fontSize: 18,
               fontWeight: "bold",
@@ -73,16 +71,14 @@ export default function RepoScreen() {
             }}>
             {repository.forks}
           </Text>
-          <Text style={{ color: `rgba(${colorScheme.mutedForeground}, 1)`, marginBottom: 12 }}>
-            {"Forks"}
-          </Text>
+          <Text style={{ color: colorScheme.mutedForeground, marginBottom: 12 }}>{"Forks"}</Text>
         </View>
         {/* Today */}
         <View style={{ alignItems: "center", flex: 1, borderRadius: 8 }}>
-          <Feather name="trending-up" size={24} color={`rgba(${colorScheme.primary}, 1)`} />
+          <Feather name="trending-up" size={24} color={colorScheme.primary} />
           <Text
             style={{
-              color: `rgba(${colorScheme.foreground}, 1)`,
+              color: colorScheme.foreground,
               marginBottom: 12,
               fontSize: 18,
               fontWeight: "bold",
@@ -90,9 +86,7 @@ export default function RepoScreen() {
             }}>
             {repository.stars}
           </Text>
-          <Text style={{ color: `rgba(${colorScheme.mutedForeground}, 1)`, marginBottom: 12 }}>
-            {"Today"}
-          </Text>
+          <Text style={{ color: colorScheme.mutedForeground, marginBottom: 12 }}>{"Today"}</Text>
         </View>
       </View>
       <View
@@ -101,7 +95,7 @@ export default function RepoScreen() {
           justifyContent: "center",
           alignContent: "center",
           marginTop: 12,
-          backgroundColor: `rgba(${colorScheme.primary}, 1)`,
+          backgroundColor: colorScheme.primary,
           borderRadius: 8,
           padding: 8,
         }}>

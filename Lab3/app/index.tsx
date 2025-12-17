@@ -1,16 +1,16 @@
 import { getTrendingRepos, TrendingResponse } from "@/utils/octokit";
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import { TrendingRepoCard } from "@/components/repoCard";
 import { LanguageSelect } from "@/components/dropdown";
 import { colorScheme } from "@/utils/colors";
+import { CommonLanguages, DataPeriods } from "@/utils/data";
 
 export default function TrendingRepoList() {
   const [repos, setRepos] = useState<TrendingResponse[]>([]);
   const [language, setLanguage] = useState<string>("Python");
-  const [loading, setLoading] = useState(true);
-
-  const daysAgo = 31;
+  const [loading, setLoading] = useState(false);
+  const [daysAgo, setDaysAgo] = useState<number>(31);
 
   useEffect(() => {
     async function load() {
@@ -23,48 +23,81 @@ export default function TrendingRepoList() {
     load();
   }, [language]);
 
+  console.log(loading);
+
   return (
     <>
       <View
         style={{
           flex: 1,
           justifyContent: "center",
-          alignItems: "center",
-          gap: 16,
-          paddingTop: 36,
+          alignItems: "flex-start",
+          gap: 12,
           paddingHorizontal: 32,
-          backgroundColor: `rgba(${colorScheme.background}, 1)`,
+          backgroundColor: colorScheme.background,
         }}>
-        <LanguageSelect
-          onSelect={(language: string) => {
-            setLoading(true);
-            setLanguage(language);
-          }}
-          currentSelected={language}
-        />
-        {repos.length > 0 && (
-          <View style={{ width: "100%" }}>
-            <Text
-              style={{
-                color: `rgba(${colorScheme.foreground}, 0.4)`,
-                fontSize: 14,
-                fontWeight: 700,
-              }}>
-              Results: {repos.length}
-            </Text>
-          </View>
-        )}
-        <ScrollView
+        <View
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: 64,
-            backgroundColor: `rgb(${colorScheme.background})`,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            width: "100%",
+            gap: 24,
           }}>
-          {repos.map((repo, index) => {
-            return <TrendingRepoCard key={index} repo={repo} />;
-          })}
-        </ScrollView>
+          <View style={{ flex: 1, gap: 4 }}>
+            <Text style={{ color: `rgba(${colorScheme.foreground}, 0.5)`, fontWeight: 600 }}>
+              Language:
+            </Text>
+            <LanguageSelect
+              onSelect={(item) => {
+                setLoading(true);
+                setLanguage(item.value as string);
+              }}
+              placeholder="Select a language"
+              data={CommonLanguages}
+              currentSelected={language}
+            />
+          </View>
+          <View style={{ flex: 1, gap: 4 }}>
+            <Text style={{ color: `rgba(${colorScheme.foreground}, 0.5)`, fontWeight: 600 }}>
+              Since:
+            </Text>
+            <LanguageSelect
+              onSelect={(item) => {
+                setLoading(true);
+                setDaysAgo(item.value as number);
+              }}
+              currentSelected={daysAgo.toString()}
+              data={DataPeriods}
+              placeholder="This month"
+            />
+          </View>
+        </View>
+
+        {loading ? (
+          <></>
+        ) : (
+          <>
+            {repos.length > 0 && (
+              <View style={{ width: "100%" }}>
+                <Text
+                  style={{
+                    color: colorScheme.mutedForeground,
+                    fontSize: 14,
+                    fontWeight: 700,
+                  }}>
+                  Results: {repos.length}
+                </Text>
+              </View>
+            )}
+            <FlatList
+              data={repos}
+              keyExtractor={(repo) => repo.id.toString()}
+              showsVerticalScrollIndicator={false}
+              renderItem={(info) => <TrendingRepoCard repo={info.item} />}></FlatList>
+          </>
+        )}
       </View>
     </>
   );

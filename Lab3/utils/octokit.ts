@@ -5,6 +5,7 @@ import { Endpoints } from "@octokit/types";
 type GitHubRepo = Endpoints["GET /search/repositories"]["response"]["data"]["items"];
 
 export type TrendingResponse = {
+  id: number;
   name: string;
   fullname: string;
   stars: number;
@@ -30,7 +31,7 @@ export async function getTrendingRepos(
 
   const cutoffDate = date.toISOString().split("T")[0];
 
-  const queryString = `language:${language} created:>${cutoffDate}`;
+  const queryString = `language:${language} created:>${cutoffDate} pushed:>${cutoffDate}`;
 
   console.log(`Searching with query: ${queryString}`);
 
@@ -46,6 +47,7 @@ export async function getTrendingRepos(
     });
 
     return response.data.items.map((repo) => ({
+      id: repo.id,
       name: repo.name,
       fullname: repo.full_name,
       stars: repo.stargazers_count,
