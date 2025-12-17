@@ -21,9 +21,7 @@ export default function TrendingRepoList() {
       setLoading(false);
     }
     load();
-  }, [language]);
-
-  console.log(loading);
+  }, [language, daysAgo]);
 
   return (
     <>
@@ -32,7 +30,7 @@ export default function TrendingRepoList() {
           flex: 1,
           justifyContent: "center",
           alignItems: "flex-start",
-          gap: 12,
+          gap: 18,
           paddingHorizontal: 32,
           backgroundColor: colorScheme.background,
         }}>
@@ -45,10 +43,8 @@ export default function TrendingRepoList() {
             width: "100%",
             gap: 24,
           }}>
-          <View style={{ flex: 1, gap: 4 }}>
-            <Text style={{ color: `rgba(${colorScheme.foreground}, 0.5)`, fontWeight: 600 }}>
-              Language:
-            </Text>
+          <View style={{ flex: 1, gap: 6 }}>
+            <Text style={{ color: colorScheme.mutedForeground, fontWeight: 600 }}>Language:</Text>
             <LanguageSelect
               onSelect={(item) => {
                 setLoading(true);
@@ -59,10 +55,8 @@ export default function TrendingRepoList() {
               currentSelected={language}
             />
           </View>
-          <View style={{ flex: 1, gap: 4 }}>
-            <Text style={{ color: `rgba(${colorScheme.foreground}, 0.5)`, fontWeight: 600 }}>
-              Since:
-            </Text>
+          <View style={{ flex: 1, gap: 6 }}>
+            <Text style={{ color: colorScheme.mutedForeground, fontWeight: 600 }}>Since:</Text>
             <LanguageSelect
               onSelect={(item) => {
                 setLoading(true);
@@ -80,7 +74,7 @@ export default function TrendingRepoList() {
         ) : (
           <>
             {repos.length > 0 && (
-              <View style={{ width: "100%" }}>
+              <View style={{ width: "100%", marginTop: 12 }}>
                 <Text
                   style={{
                     color: colorScheme.mutedForeground,
@@ -95,7 +89,8 @@ export default function TrendingRepoList() {
               data={repos}
               keyExtractor={(repo) => repo.id.toString()}
               showsVerticalScrollIndicator={false}
-              renderItem={(info) => <TrendingRepoCard repo={info.item} />}></FlatList>
+              renderItem={(info) => <TrendingRepoCard repo={info.item} />}
+            />
           </>
         )}
       </View>

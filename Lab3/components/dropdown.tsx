@@ -1,7 +1,6 @@
 import { cardGlow, colorScheme } from "@/utils/colors";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { MaterialIcons } from "@expo/vector-icons";
 
 export type DropDownData = {
   label: string;

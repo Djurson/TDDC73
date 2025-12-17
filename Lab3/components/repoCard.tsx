@@ -2,7 +2,7 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TrendingResponse } from "@/utils/octokit";
 import { cardGlow, colorScheme, languageColors } from "@/utils/colors";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
 import { normalizeLanguage } from "@/utils/data";
 
 function formatNumber(num: number): string {
@@ -13,10 +13,11 @@ function formatNumber(num: number): string {
 }
 
 export function TrendingRepoCard({ repo }: { repo: TrendingResponse }) {
-  const router = useRouter();
   const languageKey = normalizeLanguage(repo.languages);
   return (
-    <Pressable onPress={() => {}} style={styles.card}>
+    <Link
+      href={{ pathname: "/repodetails", params: { repo: JSON.stringify(repo) } }}
+      style={styles.card}>
       <View style={styles.header}>
         <View style={{ flex: 1 }}>
           <View style={{ display: "flex", justifyContent: "space-between", flexDirection: "row" }}>
@@ -63,7 +64,7 @@ export function TrendingRepoCard({ repo }: { repo: TrendingResponse }) {
           </View>
         </View>
       </View>
-    </Pressable>
+    </Link>
   );
 }
 
