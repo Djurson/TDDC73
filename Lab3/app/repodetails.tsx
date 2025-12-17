@@ -1,7 +1,7 @@
 import { Link, useLocalSearchParams } from "expo-router";
 import { TrendingResponse } from "@/utils/octokit";
 import { cardGlow, colorScheme, languageColors, primayGlow } from "@/utils/colors";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Linking, Pressable, StyleSheet, Text, View } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { normalizeLanguage } from "@/utils/data";
@@ -92,7 +92,7 @@ export default function RepoScreen() {
             />
           </View>
 
-          <Pressable style={styles.githubButton}>
+          <Pressable style={styles.githubButton} onPress={() => Linking.openURL(repository.url)}>
             <Feather name="external-link" size={16} color={colorScheme.primaryForeground} />
             <Text style={styles.githubButtonText}>Open on GitHub</Text>
           </Pressable>
