@@ -7,7 +7,7 @@ import { colorScheme } from "@/utils/colors";
 
 export default function TrendingRepoList() {
   const [repos, setRepos] = useState<TrendingResponse[]>([]);
-  const [language, setLanguage] = useState<string | null>(null);
+  const [language, setLanguage] = useState<string>("Python");
   const [loading, setLoading] = useState(true);
 
   const daysAgo = 31;
@@ -35,7 +35,25 @@ export default function TrendingRepoList() {
           paddingHorizontal: 32,
           backgroundColor: `rgba(${colorScheme.background}, 1)`,
         }}>
-        <LanguageSelect setSelected={setLanguage} currentSelected={language} />
+        <LanguageSelect
+          onSelect={(language: string) => {
+            setLoading(true);
+            setLanguage(language);
+          }}
+          currentSelected={language}
+        />
+        {repos.length > 0 && (
+          <View style={{ width: "100%" }}>
+            <Text
+              style={{
+                color: `rgba(${colorScheme.foreground}, 0.4)`,
+                fontSize: 14,
+                fontWeight: 700,
+              }}>
+              Results: {repos.length}
+            </Text>
+          </View>
+        )}
         <ScrollView
           style={{
             display: "flex",

@@ -23,10 +23,10 @@ const common_languages: DropDownData[] = [
 
 export function LanguageSelect({
   currentSelected,
-  setSelected,
+  onSelect,
 }: {
   currentSelected: string | null;
-  setSelected: Dispatch<SetStateAction<string | null>>;
+  onSelect: (language: string) => void;
 }) {
   return (
     <View
@@ -52,7 +52,7 @@ export function LanguageSelect({
         data={common_languages}
         value={currentSelected}
         onChange={(item) => {
-          setSelected(item.value);
+          onSelect(item);
         }}
       />
     </View>
