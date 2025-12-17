@@ -1,16 +1,10 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TrendingResponse } from "@/utils/octokit";
 import { cardGlow, colorScheme, languageColors } from "@/utils/colors";
 import { Link } from "expo-router";
 import { normalizeLanguage } from "@/utils/data";
-
-function formatNumber(num: number): string {
-  if (num >= 1000) {
-    return (num / 1000).toFixed(1).replace(/\.0$/, "") + "k";
-  }
-  return num.toString();
-}
+import { formatNumber } from "@/utils/functions";
 
 export function TrendingRepoCard({ repo }: { repo: TrendingResponse }) {
   const languageKey = normalizeLanguage(repo.languages);
@@ -77,9 +71,11 @@ const styles = StyleSheet.create({
     borderColor: "rgba(39, 44, 53, 0.5)",
     marginBottom: 18,
     boxShadow: cardGlow("md"),
+    width: "100%",
   },
   header: {
     marginBottom: 12,
+    width: "100%",
   },
   ownerRow: {
     flexDirection: "row",
@@ -148,6 +144,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: `rgba(39, 44, 53, 0.5)`,
+    width: "100%",
   },
   trendingText: {
     fontSize: 12,

@@ -1,11 +1,16 @@
-import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { colorScheme, primayGlow } from "@/utils/colors";
+import { usePathname } from "expo-router";
 
 const TrendingHeader = () => {
+  const pathname = usePathname();
+  const isRepoDetails = pathname.startsWith("/repodetails");
+
+  if (isRepoDetails) return <></>;
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.headerContainer}>
