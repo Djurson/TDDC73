@@ -16,7 +16,7 @@ export function LanguageSelect({
 }: {
   placeholder?: string;
   data: DropDownData[];
-  currentSelected: string | null;
+  currentSelected: string | number | null;
   onSelect: (value: DropDownData) => void;
 }) {
   return (

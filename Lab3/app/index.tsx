@@ -35,14 +35,17 @@ export default function TrendingRepoList() {
           backgroundColor: colorScheme.background,
         }}>
         <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            width: "100%",
-            gap: 24,
-          }}>
+          style={[
+            {
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              width: "100%",
+              gap: 24,
+            },
+            loading ? { flex: 1 } : {},
+          ]}>
           <View style={{ flex: 1, gap: 6 }}>
             <Text style={{ color: colorScheme.mutedForeground, fontWeight: 600 }}>Language:</Text>
             <LanguageSelect
@@ -62,7 +65,7 @@ export default function TrendingRepoList() {
                 setLoading(true);
                 setDaysAgo(item.value as number);
               }}
-              currentSelected={daysAgo.toString()}
+              currentSelected={daysAgo}
               data={DataPeriods}
               placeholder="This month"
             />

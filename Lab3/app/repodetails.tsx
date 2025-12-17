@@ -4,7 +4,6 @@ import { cardGlow, colorScheme, languageColors, primayGlow } from "@/utils/color
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { normalizeLanguage } from "@/utils/data";
 import { formatNumber } from "@/utils/functions";
 
