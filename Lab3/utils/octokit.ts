@@ -1,12 +1,19 @@
 import { Octokit } from "octokit";
+import { Endpoints } from "@octokit/types";
+
+/* https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories */
+type GitHubRepo = Endpoints["GET /search/repositories"]["response"]["data"]["items"];
 
 export type TrendingResponse = {
   name: string;
+  fullname: string;
   stars: number;
   description: string | null;
   url: string;
   created_at: string;
   forks: number;
+  languages: string | null;
+  owner: string | null | undefined;
 };
 
 const octokit = new Octokit({
@@ -40,11 +47,14 @@ export async function getTrendingRepos(
 
     return response.data.items.map((repo) => ({
       name: repo.name,
+      fullname: repo.full_name,
       stars: repo.stargazers_count,
       description: repo.description,
       url: repo.html_url,
       created_at: repo.created_at.split("T")[0],
       forks: repo.forks_count,
+      languages: repo.language,
+      owner: repo.owner?.login,
     }));
   } catch (error) {
     console.error("Fel vid anrop till GitHub API:", error);

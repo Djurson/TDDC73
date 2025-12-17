@@ -3,6 +3,7 @@ import { ScrollView, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import { TrendingRepoCard } from "@/components/repoCard";
 import { LanguageSelect } from "@/components/dropdown";
+import { colorScheme } from "@/utils/colors";
 
 export default function TrendingRepoList() {
   const [repos, setRepos] = useState<TrendingResponse[]>([]);
@@ -23,20 +24,30 @@ export default function TrendingRepoList() {
   }, [language]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 16,
-        paddingTop: 36,
-      }}>
-      <LanguageSelect setSelected={setLanguage} currentSelected={language} />
-      <ScrollView>
-        {repos.map((repo, index) => {
-          return <TrendingRepoCard key={index} repo={repo} />;
-        })}
-      </ScrollView>
-    </View>
+    <>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 16,
+          paddingTop: 36,
+          paddingHorizontal: 32,
+          backgroundColor: `rgba(${colorScheme.background}, 1)`,
+        }}>
+        <LanguageSelect setSelected={setLanguage} currentSelected={language} />
+        <ScrollView
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 64,
+            backgroundColor: `rgb(${colorScheme.background})`,
+          }}>
+          {repos.map((repo, index) => {
+            return <TrendingRepoCard key={index} repo={repo} />;
+          })}
+        </ScrollView>
+      </View>
+    </>
   );
 }
