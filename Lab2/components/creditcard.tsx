@@ -51,8 +51,8 @@ export function CreditCard({ creditCardInfo }: { creditCardInfo: CreditCardInfo 
         ]}>
         <ImageBackground
           style={styles.frontBg}
-          // source={require("../assets/images/card-images/13.jpeg")}
-          source={CardBackgroundImages[background]}
+          source={require("../assets/images/card-images/13.jpeg")}
+          // source={CardBackgroundImages[background]}
           contentFit="fill">
           <View style={styles.cardTopRow}>
             <Image
@@ -113,8 +113,8 @@ export function CreditCard({ creditCardInfo }: { creditCardInfo: CreditCardInfo 
         ]}>
         <ImageBackground
           style={[{ flex: 1, transform: [{ scaleX: -1 }], paddingTop: 16, gap: 24 }]}
-          // source={require("../assets/images/card-images/13.jpeg")}
-          source={CardBackgroundImages[background]}
+          source={require("../assets/images/card-images/13.jpeg")}
+          // source={CardBackgroundImages[background]}
           contentFit="fill">
           <View style={{ transform: [{ scaleX: -1 }], flex: 1 }}>
             <View style={{ flex: 0.33, backgroundColor: "rgba(0, 0, 0, 1)" }} />

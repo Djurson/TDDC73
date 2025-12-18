@@ -1,6 +1,6 @@
 package com.example.kotlin_compose
 
-import android.R
+/* import android.R */
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
@@ -10,7 +10,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,6 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.example.kotlin_compose.ui.theme.KotlinComposeTheme
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +59,23 @@ class MainActivity : ComponentActivity() {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(color=0xFF153D37))
+                                    .height(height=25.dp)
+                            ){}
+                            Box(modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color(color=0xFF2A7E72))
+                                .height(height=50.dp)
+                            ) {
+                                Text(
+                                    text="Example Kotlin + Compose",
+                                    fontSize = 20.sp,
+                                    color = Color(0xFFF)
+                                )
+                            }
                             DiagramImage()
                             ButtonGroup()
                             Spacer(modifier = Modifier.height(24.dp))
@@ -87,7 +108,7 @@ fun AppCompatStyledButton(buttonText: String) {
 @Composable
 fun DiagramImage() {
     Image(
-        painter = painterResource(id = R.drawable),
+        painter = painterResource(id = R.drawable.circleimage),
         contentDescription = "diagram",
         modifier = Modifier
             .fillMaxWidth()
