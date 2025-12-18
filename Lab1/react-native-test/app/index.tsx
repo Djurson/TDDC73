@@ -1,12 +1,12 @@
 import { Button } from "@/components/button";
 import { SplitCircle } from "@/components/circle";
 import { styles } from "@/utils/util";
-import { Text, TextInput, View } from "react-native";
+import { Image, Text, TextInput, View } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.outerContainer}>
-      <SplitCircle />
+      <Image source={require("@/assets/icons/Diagram.png")} />
       <View style={styles.innerContainer}>
         <View style={styles.columnContainer}>
           <Button title="Button 1" />
